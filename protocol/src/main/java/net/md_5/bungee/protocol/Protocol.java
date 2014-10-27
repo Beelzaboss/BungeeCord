@@ -10,6 +10,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import net.md_5.bungee.protocol.packet.Chat;
 import net.md_5.bungee.protocol.packet.ClientSettings;
+import net.md_5.bungee.protocol.packet.CustomPacket;
 import net.md_5.bungee.protocol.packet.EncryptionRequest;
 import net.md_5.bungee.protocol.packet.EncryptionResponse;
 import net.md_5.bungee.protocol.packet.Handshake;
@@ -143,6 +144,16 @@ public enum Protocol
             {
                 throw new BadPacketException( "Could not construct packet with id " + id, ex );
             }
+        }
+
+        public final void registerCustomPacket(int id, Class<? extends CustomPacket> packetClass)
+        {
+            if (hasPacket(id)) 
+            {
+                throw new IllegalArgumentException("A packet with the ID " + id + " already exists.");
+            }
+
+            registerPacket(id, packetClass);
         }
 
         protected final void registerPacket(int id, Class<? extends DefinedPacket> packetClass)
