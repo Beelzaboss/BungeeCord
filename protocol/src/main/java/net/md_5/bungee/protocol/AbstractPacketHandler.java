@@ -31,6 +31,9 @@ import net.md_5.bungee.protocol.packet.Title;
 
 public abstract class AbstractPacketHandler
 {
+    public void handle(CustomPacket packet) throws Exception
+    {
+    }
 
     public void handle(LegacyPing ping) throws Exception
     {

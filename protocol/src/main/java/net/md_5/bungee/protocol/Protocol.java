@@ -33,6 +33,7 @@ import net.md_5.bungee.protocol.packet.TabCompleteRequest;
 import net.md_5.bungee.protocol.packet.TabCompleteResponse;
 import net.md_5.bungee.protocol.packet.Team;
 import net.md_5.bungee.protocol.packet.Title;
+import net.md_5.bungee.protocol.packet.custom.Galacticraft;
 
 public enum Protocol
 {
@@ -71,6 +72,10 @@ public enum Protocol
                     TO_SERVER.registerPacket( 0x14, TabCompleteRequest.class );
                     TO_SERVER.registerPacket( 0x15, ClientSettings.class );
                     TO_SERVER.registerPacket( 0x17, PluginMessage.class );
+
+                    // Custom Packets
+                    TO_CLIENT.registerPacket( 0x09D3, Galacticraft.class );
+                    TO_SERVER.registerPacket( 0x09D3, Galacticraft.class );
                 }
             },
     // 1
@@ -100,7 +105,7 @@ public enum Protocol
                 }
             };
     /*========================================================================*/
-    public static final int MAX_PACKET_ID = 0xFF;
+    public static final int MAX_PACKET_ID = 0xFFFF;
     public static List<Integer> supportedVersions = Arrays.asList(
             ProtocolConstants.MINECRAFT_1_7_2,
             ProtocolConstants.MINECRAFT_1_7_6,

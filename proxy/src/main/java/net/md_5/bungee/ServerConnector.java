@@ -27,6 +27,7 @@ import net.md_5.bungee.forge.ForgeUtils;
 import net.md_5.bungee.netty.ChannelWrapper;
 import net.md_5.bungee.netty.HandlerBoss;
 import net.md_5.bungee.netty.PacketHandler;
+import net.md_5.bungee.protocol.CustomPacket;
 import net.md_5.bungee.protocol.DefinedPacket;
 import net.md_5.bungee.protocol.MinecraftOutput;
 import net.md_5.bungee.protocol.Protocol;
@@ -336,5 +337,16 @@ public class ServerConnector extends PacketHandler
     public String toString()
     {
         return "[" + user.getName() + "] <-> ServerConnector [" + target.getName() + "]";
+    }
+
+    /**
+     * Pass any custom packets down to the user.
+     * 
+     * @param packet The packet to send.
+     */
+    @Override
+    public void handle(CustomPacket packet)
+    {
+        user.unsafe().sendPacket( packet );
     }
 }
